@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+	 <Folder Include="DTOS\" />
+	  <Folder Include="Enums\" />
+  </ItemGroup>
+
 </Project>
