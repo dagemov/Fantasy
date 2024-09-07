@@ -1,4 +1,8 @@
-﻿using Data;
+﻿using BusinessLogic.Interfaces;
+using BusinessLogic.Services;
+using Data;
+using Data.Interfaces;
+using Data.Repository;
 using Fantasy.Backend.Errors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -37,7 +41,8 @@ public static class ServiceAppExtension
         services.AddCors();
 
         services.AddAutoMapper(typeof(MappingProfile));
-
+        services.AddScoped<ICountryService, CountryService>();
+        services.AddScoped<IUnitWork, UnitWork>();
         return services;
     }
 }
