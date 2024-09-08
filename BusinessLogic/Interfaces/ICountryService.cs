@@ -8,7 +8,9 @@ public interface ICountryService
 
     Task<CountryDTO> Add(CountryDTO countryDTO);
 
-    Task<CountryDTO> Update(CountryDTO countryDTO);
+    Task Update(CountryDTO countryDTO);
 
-    Task<CountryDTO> Delete(int id);
+    Task Delete(int id);
+
+    Task<CountryDTO> Get(int id);
 }

@@ -42,18 +42,68 @@ public class CountryService : ICountryService
         }
     }
 
-    public Task<CountryDTO> Delete(int id)
+    public async Task Delete(int id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var countryDb = await _unitWork.CountryRepository.GetAsync(c => c.Id == id);
+
+            if (countryDb == null) throw new TaskCanceledException("The record does not exist");
+
+            _unitWork.CountryRepository.Delete(countryDb);
+            await _unitWork.Save();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
     }
 
-    public Task<IEnumerable<CountryDTO>> GetAll()
+    public async Task<CountryDTO> Get(int id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var country = await _unitWork.CountryRepository.GetAsync(c => c.Id == id);
+
+            if (country == null) throw new TaskCanceledException("No countries records match with the id : " + id);
+
+            return _mapper.Map<CountryDTO>(_mapper.Map<CountryDTO>(country));
+        }
+        catch (Exception)
+        {
+            throw;
+        }
     }
 
-    public Task<CountryDTO> Update(CountryDTO countryDTO)
+    public async Task<IEnumerable<CountryDTO>> GetAll()
     {
-        throw new NotImplementedException();
+        try
+        {
+            var list = await _unitWork.CountryRepository.GetAllAsync();
+            return _mapper.Map<IEnumerable<CountryDTO>>(list);
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+
+    public async Task Update(CountryDTO countryDTO)
+    {
+        try
+        {
+            var countryDb = await _unitWork.CountryRepository.GetAsync(c => c.Id == countryDTO.Id);
+
+            if (countryDb == null) throw new TaskCanceledException("Record not found or not exist , ples check out");
+
+            countryDb.Name = countryDTO.Name;
+
+            _unitWork.CountryRepository.Update(countryDb);
+            await _unitWork.Save();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
     }
 }
