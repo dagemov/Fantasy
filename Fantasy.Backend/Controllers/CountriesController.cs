@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Models.DTOS;
+using System.Collections.Generic;
 using System.Net;
 
 namespace Fantasy.Backend.Controllers;
@@ -11,82 +12,86 @@ namespace Fantasy.Backend.Controllers;
 public class CountriesController : ControllerBase
 {
     private readonly ICountryService _countryService;
-    private readonly ApiResponse _response;
+    //private readonly ApiResponse _response;
 
     public CountriesController(ICountryService countryService)
     {
         _countryService = countryService;
-        _response = new ApiResponse();
+        //_response = new ApiResponse();
     }
 
     [HttpPost]
     public async Task<IActionResult> Create(CountryDTO countryDTO)
     {
+        var response = new ApiResponse<CountryDTO>();
         try
         {
             await _countryService.Add(countryDTO);
-            _response.IsSuccesfuly = true;
-            _response.StatusCode = HttpStatusCode.OK;
+            response.IsSuccesfuly = true;
+            response.StatusCode = HttpStatusCode.OK;
         }
         catch (Exception ex)
         {
-            _response.IsSuccesfuly = false;
-            _response.StatusCode = HttpStatusCode.BadRequest;
-            _response.Message = ex.Message;
+            response.IsSuccesfuly = false;
+            response.StatusCode = HttpStatusCode.BadRequest;
+            response.Message = ex.Message;
         }
-        return Ok(_response);
+        return Ok(response);
     }
 
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
+        var response = new ApiResponse<IEnumerable<CountryDTO>>();
         try
         {
-            _response.Result = await _countryService.GetAll();
-            _response.IsSuccesfuly = true;
-            _response.StatusCode = HttpStatusCode.OK;
+            response.Result = await _countryService.GetAll();
+            response.IsSuccesfuly = true;
+            response.StatusCode = HttpStatusCode.OK;
         }
         catch (Exception ex)
         {
-            _response.IsSuccesfuly = false;
-            _response.StatusCode = HttpStatusCode.BadRequest;
-            _response.Message = ex.Message;
+            response.IsSuccesfuly = false;
+            response.StatusCode = HttpStatusCode.BadRequest;
+            response.Message = ex.Message;
         }
-        return Ok(_response);
+        return Ok(response);
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetCountry(int id)
     {
+        var response = new ApiResponse<CountryDTO>();
         try
         {
-            _response.Result = await _countryService.Get(id);
-            _response.IsSuccesfuly = true;
-            _response.StatusCode = HttpStatusCode.OK;
+            response.Result = await _countryService.Get(id);
+            response.IsSuccesfuly = true;
+            response.StatusCode = HttpStatusCode.OK;
         }
         catch (Exception ex)
         {
-            _response.IsSuccesfuly = false;
-            _response.StatusCode = HttpStatusCode.BadRequest;
-            _response.Message = ex.Message;
+            response.IsSuccesfuly = false;
+            response.StatusCode = HttpStatusCode.BadRequest;
+            response.Message = ex.Message;
         }
-        return Ok(_response);
+        return Ok(response);
     }
 
     [HttpDelete]
     public async Task<IActionResult> Delete(int id)
     {
+        var response = new ApiResponse<CountryDTO>();
         try
         {
             await _countryService.Delete(id);
-            _response.IsSuccesfuly = true;
-            _response.StatusCode = HttpStatusCode.NoContent;
+            response.IsSuccesfuly = true;
+            response.StatusCode = HttpStatusCode.NoContent;
         }
         catch (Exception ex)
         {
-            _response.IsSuccesfuly = false;
-            _response.StatusCode = HttpStatusCode.BadRequest;
-            _response.Message = ex.Message;
+            response.IsSuccesfuly = false;
+            response.StatusCode = HttpStatusCode.BadRequest;
+            response.Message = ex.Message;
         }
         return NoContent();
     }
@@ -94,18 +99,19 @@ public class CountriesController : ControllerBase
     [HttpPut]
     public async Task<IActionResult> Update(CountryDTO countryDTO)
     {
+        var response = new ApiResponse<CountryDTO>();
         try
         {
             await _countryService.Update(countryDTO);
-            _response.IsSuccesfuly = true;
-            _response.StatusCode = HttpStatusCode.OK;
+            response.IsSuccesfuly = true;
+            response.StatusCode = HttpStatusCode.OK;
         }
         catch (Exception ex)
         {
-            _response.IsSuccesfuly = false;
-            _response.StatusCode = HttpStatusCode.BadRequest;
-            _response.Message = ex.Message;
+            response.IsSuccesfuly = false;
+            response.StatusCode = HttpStatusCode.BadRequest;
+            response.Message = ex.Message;
         }
-        return Ok(_response);
+        return Ok(response);
     }
 }

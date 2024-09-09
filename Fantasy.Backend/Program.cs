@@ -22,15 +22,16 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors(
-    x => x
-    .AllowAnyOrigin()
-    .AllowAnyHeader()
-    .AllowAnyMethod()
-);
-
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors(
+    x => x
+     .AllowAnyMethod()
+    .AllowAnyHeader()
+    .SetIsOriginAllowed(origin => true)
+    .AllowCredentials()
+);
 
 app.Run();
