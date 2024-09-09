@@ -18,6 +18,8 @@ public static class ServiceAppExtension
         services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7231/") });
 
         services.AddScoped<IRepository, Repository>();
+        //Multi Lenguajes
+        services.AddLocalization();
 
         return services;
     }

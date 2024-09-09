@@ -1,16 +1,16 @@
 ﻿@page "/countries"
 
 
-<h3>Countries</h3>
+<h3>@Localizer["Countries"]</h3>
 
-@if(Countries is null)
+@if (Countries is null)
 {
     <p>Loading...</p>
 }
 else
 {
     <div class="mb-2">
-        <RadzenButton  Icon="add">New</RadzenButton>
+        <RadzenButton Text="@Localizer["New"]" Icon="add" ></RadzenButton>
     </div>
     <GenericList MyList="Countries">
         <Body>
@@ -27,7 +27,7 @@ else
                         <tr>
                             <td>@country.Name</td>
                             <td>
-                                <RadzenButton ButtonStyle="ButtonStyle.Warning" Icon="edit_square">Edit</RadzenButton>
+                                <RadzenButton ButtonStyle="ButtonStyle.Warning" Icon="edit_square"></RadzenButton>
                                 <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete_forever" />
                             </td>
                         </tr>
