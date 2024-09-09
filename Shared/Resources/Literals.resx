@@ -147,4 +147,43 @@
   <data name="NoRecords" xml:space="preserve">
     <value>No records to show...</value>
   </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+  <data name="LLC" xml:space="preserve">
+    <value>Do you want Leave and lose  yours Changes ? </value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save Changes</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>Return</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="RecordOk" xml:space="preserve">
+    <value>Record saved successfully</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="DeleteConfirm" xml:space="preserve">
+    <value>Are you sure to delete the {0} : {1}?</value>
+  </data>
+  <data name="RecordDeleteOk" xml:space="preserve">
+    <value>Record deleted successfully</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Not</value>
+  </data>
 </root>

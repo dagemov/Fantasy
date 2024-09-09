@@ -127,4 +127,43 @@
   <data name="NoRecords" xml:space="preserve">
     <value>No hay registros para mostrar</value>
   </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Confirmar</value>
+  </data>
+  <data name="LLC" xml:space="preserve">
+    <value>Quieres salir y perder tus cambios ?</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Guardar cambios</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>Regresar</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Pais</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Crear</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="RecordOk" xml:space="preserve">
+    <value>Registro guardado exitosamente</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="DeleteConfirm" xml:space="preserve">
+    <value>Estas seguro de eliminar el {0} : {1}</value>
+  </data>
+  <data name="RecordDeleteOk" xml:space="preserve">
+    <value>Registro borrado existosamente</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Si</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
 </root>

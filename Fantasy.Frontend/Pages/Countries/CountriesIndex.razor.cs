@@ -9,6 +9,8 @@ namespace Fantasy.Frontend.Pages.Countries;
 public partial class CountriesIndex
 {
     //Vars
+    [Inject] private NavigationManager? Navigation { get; set; }
+
     [Inject] private IStringLocalizer<Literals> Localizer { get; set; } = null!;
 
     [Inject] private IRepository Repository { set; get; } = null!;
@@ -21,5 +23,10 @@ public partial class CountriesIndex
         var responseHttp = await Repository.GetAsync<List<CountryDTO>>("api/Countries");
 
         Countries = responseHttp.Response;
+    }
+    //Button Radzen Actions
+    private void CreateNew()
+    {
+        Navigation!.NavigateTo("/countries/create");
     }
 }

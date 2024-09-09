@@ -1,4 +1,5 @@
-﻿using Fantasy.Frontend.Repositories.Interfaces;
+﻿using CurrieTechnologies.Razor.SweetAlert2;
+using Fantasy.Frontend.Repositories.Interfaces;
 using Fantasy.Frontend.Repositories.Service;
 using Radzen;
 
@@ -18,6 +19,7 @@ public static class ServiceAppExtension
         services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7231/") });
 
         services.AddScoped<IRepository, Repository>();
+        services.AddSweetAlert2();
         //Multi Lenguajes
         services.AddLocalization();
 
