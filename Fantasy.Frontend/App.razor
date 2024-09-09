@@ -1,7 +1,11 @@
-﻿<Router AppAssembly="@typeof(App).Assembly">
+﻿<HeadContent>
+   
+</HeadContent>
+<Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
         <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+
     </Found>
     <NotFound>
         <PageTitle>Not found</PageTitle>
@@ -10,3 +14,6 @@
         </LayoutView>
     </NotFound>
 </Router>
+
+<RadzenTheme Theme="material" />
+<script src="_content/Radzen.Blazor/Radzen.Blazor.js?v=@(typeof(Radzen.Colors).Assembly.GetName().Version)"></script>
