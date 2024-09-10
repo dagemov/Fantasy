@@ -77,7 +77,7 @@ public class CountriesController : ControllerBase
         return Ok(response);
     }
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
         var response = new ApiResponse<CountryDTO>();

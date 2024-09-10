@@ -32,7 +32,7 @@ public partial class CountryCreate
         var toast = SweetAlertService.Mixin(new SweetAlertOptions
         {
             Toast = true,
-            Position = SweetAlertPosition.BottomEnd,
+            Position = SweetAlertPosition.TopEnd,
             ShowConfirmButton = true,
             Timer = 3000
         });
