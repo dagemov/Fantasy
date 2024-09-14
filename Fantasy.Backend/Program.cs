@@ -12,11 +12,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var connectionString = builder.Configuration.GetConnectionString("LocalConnection");
-builder.Services.AddDbContext<DataContext>(options =>
-options.UseSqlServer(connectionString)
-       .EnableSensitiveDataLogging() // Habilita logging detallado para Entity Framework
-);
 builder.Services.AddServiceApp(builder.Configuration);
 
 var app = builder.Build();

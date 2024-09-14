@@ -5,12 +5,15 @@ namespace Data.Repository
     public class UnitWork : IUnitWork
     {
         private readonly DataContext _context;
-        public ICountryRepository CountryRepository { get; set; }
 
         public UnitWork(DataContext context)
         {
             _context = context;
-            CountryRepository = new CountryRepository(_context);
+        }
+
+        public IRepositoryGeneric<T> GetRepository<T>() where T : class
+        {
+            return new RepositoryGeneric<T>(_context);
         }
 
         public void Dispose()

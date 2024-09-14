@@ -166,4 +166,10 @@
   <data name="No" xml:space="preserve">
     <value>No</value>
   </data>
+  <data name="ERR001" xml:space="preserve">
+    <value>Registro no encontrado</value>
+  </data>
+  <data name="ERR002" xml:space="preserve">
+    <value>No se puede borrar porque tiene registros relacionados</value>
+  </data>
 </root>

@@ -10,29 +10,22 @@ public class CountryService : ICountryService
 {
     private readonly IMapper _mapper;
     private readonly IUnitWork _unitWork;
+    private readonly IRepositoryGeneric<Country> _countryRepository;
 
     public CountryService(IMapper mapper, IUnitWork unitWork)
     {
         _mapper = mapper;
         _unitWork = unitWork;
+        _countryRepository = _unitWork.GetRepository<Country>(); // Obtener el repositorio generico para 'Country'
     }
 
     public async Task<CountryDTO> Add(CountryDTO countryDTO)
     {
         try
         {
-            Country country = new Country()
-            {
-                Name = countryDTO.Name,
-            };
-
-            await _unitWork.CountryRepository.Add(country);
+            var country = _mapper.Map<Country>(countryDTO);
+            await _countryRepository.AddAsync(country);
             await _unitWork.Save();
-
-            if (country == null)
-            {
-                throw new TaskCanceledException("Error to created Country");
-            }
 
             return _mapper.Map<CountryDTO>(country);
         }
@@ -46,11 +39,12 @@ public class CountryService : ICountryService
     {
         try
         {
-            var countryDb = await _unitWork.CountryRepository.GetAsync(c => c.Id == id);
+            var countryDb = await _countryRepository.GetAsync(id);
 
-            if (countryDb == null) throw new TaskCanceledException("The record does not exist");
+            if (!countryDb.IsSuccesfuly || countryDb.Result == null)
+                throw new TaskCanceledException("The record does not exist");
 
-            _unitWork.CountryRepository.Delete(countryDb);
+            await _countryRepository.DeleteAsync(id);
             await _unitWork.Save();
         }
         catch (Exception)
@@ -63,11 +57,14 @@ public class CountryService : ICountryService
     {
         try
         {
-            var country = await _unitWork.CountryRepository.GetAsync(c => c.Id == id);
+            var response = await _countryRepository.GetAsync(id);
 
-            if (country == null) throw new TaskCanceledException("No countries records match with the id : " + id);
+            if (!response.IsSuccesfuly || response.Result == null)
+            {
+                throw new TaskCanceledException($"No countries records match with the id: {id}");
+            }
 
-            return _mapper.Map<CountryDTO>(_mapper.Map<CountryDTO>(country));
+            return _mapper.Map<CountryDTO>(response.Result);
         }
         catch (Exception)
         {
@@ -79,8 +76,8 @@ public class CountryService : ICountryService
     {
         try
         {
-            var list = await _unitWork.CountryRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<CountryDTO>>(list);
+            var list = await _countryRepository.GetAsync();
+            return _mapper.Map<IEnumerable<CountryDTO>>(list.Result);
         }
         catch (Exception)
         {
@@ -92,13 +89,15 @@ public class CountryService : ICountryService
     {
         try
         {
-            var countryDb = await _unitWork.CountryRepository.GetAsync(c => c.Id == countryDTO.Id);
+            var countryDb = await _countryRepository.GetAsync(countryDTO.Id);
 
-            if (countryDb == null) throw new TaskCanceledException("Record not found or not exist , ples check out");
+            if (!countryDb.IsSuccesfuly || countryDb.Result == null)
+                throw new TaskCanceledException("Record not found or not exist, please check out");
 
-            countryDb.Name = countryDTO.Name;
+            var country = countryDb.Result;
+            country.Name = countryDTO.Name;
 
-            _unitWork.CountryRepository.Update(countryDb);
+            await _countryRepository.UpdateAsync(country);
             await _unitWork.Save();
         }
         catch (Exception)

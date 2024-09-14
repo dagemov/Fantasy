@@ -2,8 +2,7 @@
 
 public interface IUnitWork : IDisposable
 {
-    //  IAddressRepository AddressRepository { get; }
-    ICountryRepository CountryRepository { get; }
+    IRepositoryGeneric<T> GetRepository<T>() where T : class;
 
     Task Save();
 }

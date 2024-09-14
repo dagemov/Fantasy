@@ -9,8 +9,10 @@ public class MappingProfile : Profile
     public MappingProfile()
     {
         CreateMap<Country, CountryDTO>();
+        CreateMap<Team, TeamDTO>();
 
         //Inverse Maps
         CreateMap<CountryDTO, Country>();
+        CreateMap<TeamDTO, Team>();
     }
 }

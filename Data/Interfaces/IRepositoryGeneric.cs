@@ -1,21 +1,17 @@
-﻿using System.Linq.Expressions;
+﻿using Models.DTOS;
+using System.Linq.Expressions;
 
 namespace Data.Interfaces;
 
 public interface IRepositoryGeneric<T> where T : class
 {
-    Task<IEnumerable<T>> GetAllAsync(
-              Expression<Func<T, bool>> filter = null!,
-              Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null!,
-              string includeProperties = null!  //Include
-          );
+    Task<ApiResponse<T>> GetAsync(int id);
 
-    Task<T> GetAsync(
-             Expression<Func<T, bool>> filter = null!,
-             string includeProperties = null!
-        );
+    Task<ApiResponse<IEnumerable<T>>> GetAsync();
 
-    Task Add(T entity);
+    Task<ApiResponse<T>> AddAsync(T entity);
 
-    void Delete(T entity);
+    Task<ApiResponse<T>> DeleteAsync(int id);
+
+    Task<ApiResponse<T>> UpdateAsync(T entity);
 }

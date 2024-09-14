@@ -1,5 +1,6 @@
 ﻿using Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Models.DTOS;
 using System.Linq.Expressions;
 
 namespace Data.Repository;
@@ -7,60 +8,132 @@ namespace Data.Repository;
 public class RepositoryGeneric<T> : IRepositoryGeneric<T> where T : class
 {
     private readonly DataContext _context;
-    private DbSet<T> _dbSet;
+    private readonly DbSet<T> _entity;
 
     public RepositoryGeneric(DataContext context)
     {
         _context = context;
-        _dbSet = _context.Set<T>();
+        _entity = context.Set<T>();
     }
 
-    public async Task Add(T entity)
+    public virtual async Task<ApiResponse<T>> AddAsync(T entity)
     {
-        await _dbSet.AddAsync(entity);
-    }
-
-    public void Delete(T entity)
-    {
-        _dbSet.Remove(entity);
-    }
-
-    public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = null)
-    {
-        IQueryable<T> query = _dbSet;
-        if (filter != null)
+        _context.Add(entity);
+        try
         {
-            query = query.Where(filter);
-        }
-        if (includeProperties != null)
-        {
-            foreach (var ip in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            await _context.SaveChangesAsync();
+            return new ApiResponse<T>
             {
-                query = query.Include(ip);
-            }
+                IsSuccesfuly = true,
+                Result = entity
+            };
         }
-        if (orderBy != null)
+        catch (DbUpdateException)
         {
-            return await orderBy(query).ToListAsync();
+            return DbUpdateExceptionActionResponse();
         }
-        return await query.ToListAsync();
+        catch (Exception exception)
+        {
+            return ExceptionActionResponse(exception);
+        }
     }
 
-    public async Task<T> GetAsync(Expression<Func<T, bool>> filter = null, string includeProperties = null)
+    public virtual async Task<ApiResponse<T>> DeleteAsync(int id)
     {
-        IQueryable<T> query = _dbSet;
-        if (filter != null)
+        var row = await _entity.FindAsync(id);
+        if (row == null)
         {
-            query = query.Where(filter);
-        }
-        if (includeProperties != null)
-        {
-            foreach (var ip in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            return new ApiResponse<T>
             {
-                query = query.Include(ip);
-            }
+                IsSuccesfuly = false,
+                Message = "ERR001"
+            };
         }
 
-        return await query.FirstOrDefaultAsync();
+        try
+        {
+            _entity.Remove(row);
+            await _context.SaveChangesAsync();
+            return new ApiResponse<T>
+            {
+                IsSuccesfuly = true,
+            };
+        }
+        catch
+        {
+            return new ApiResponse<T>
+            {
+                IsSuccesfuly = false,
+                Message = "ERR002"
+            };
+        }
+    }
+
+    public virtual async Task<ApiResponse<T>> GetAsync(int id)
+    {
+        var row = await _entity.FindAsync(id);
+        if (row == null)
+        {
+            return new ApiResponse<T>
+            {
+                IsSuccesfuly = false,
+                Message = "ERR001"
+            };
+        }
+        return new ApiResponse<T>
+        {
+            IsSuccesfuly = true,
+            Result = row
+        };
+    }
+
+    public virtual async Task<ApiResponse<IEnumerable<T>>> GetAsync()
+    {
+        return new ApiResponse<IEnumerable<T>>
+        {
+            IsSuccesfuly = true,
+            Result = await _entity.ToListAsync()
+        };
+    }
+
+    public virtual async Task<ApiResponse<T>> UpdateAsync(T entity)
+    {
+        _context.Update(entity);
+        try
+        {
+            await _context.SaveChangesAsync();
+            return new ApiResponse<T>
+            {
+                IsSuccesfuly = true,
+                Result = entity
+            };
+        }
+        catch (DbUpdateException)
+        {
+            return DbUpdateExceptionActionResponse();
+        }
+        catch (Exception exception)
+        {
+            return ExceptionActionResponse(exception);
+        }
+    }
+
+    //Erros Catch
+    private ApiResponse<T> ExceptionActionResponse(Exception exception)
+    {
+        return new ApiResponse<T>
+        {
+            IsSuccesfuly = false,
+            Message = exception.Message
+        };
+    }
+
+    private ApiResponse<T> DbUpdateExceptionActionResponse()
+    {
+        return new ApiResponse<T>
+        {
+            IsSuccesfuly = false,
+            Message = "ERR003"
+        };
     }
 }
