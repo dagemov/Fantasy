@@ -41,8 +41,13 @@ public static class ServiceAppExtension
         services.AddCors();
 
         services.AddAutoMapper(typeof(MappingProfile));
+        //I'm only comment the inyeccion cuz the country working with the genericService and unitWork;but if we need
+        //at more logic, we have yo inyect it.
         services.AddScoped<ICountryService, CountryService>();
+        
         services.AddScoped<IUnitWork, UnitWork>();
+        //Our unit Work implement the RepositoryGeneric and GenericService :)
+        //services.AddScoped<(typeof (IRepositoryGeneric<>),typeof( RepositoryGeneric<>));
         return services;
     }
 }

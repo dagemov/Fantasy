@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Data.Interfaces;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Models.DTOS;
 using System.Collections.Generic;
 using System.Net;
@@ -29,7 +31,14 @@ public class BaseApiController<TEntity, TDto> : ControllerBase
     {
         var entity = _mapper.Map<TEntity>(dto);
         var result = await _repository.AddAsync(entity);
-        await _unitWork.Save();
+        try
+        {
+            await _unitWork.Save();
+        }
+        catch (Exception)
+        {
+            return BadRequest(result.Message);
+        }
 
         ApiResponse<TDto> apiResponse = new()
         {
@@ -73,8 +82,16 @@ public class BaseApiController<TEntity, TDto> : ControllerBase
     [HttpDelete("{id}")]
     public virtual async Task<IActionResult> Delete(int id)
     {
-        await _repository.DeleteAsync(id);
-        await _unitWork.Save();
+        var row = await _repository.DeleteAsync(id);
+        try
+        {
+            await _unitWork.Save();
+        }
+        catch (Exception)
+        {
+            return BadRequest(row.Message);
+        }
+
         return NoContent();
     }
 
@@ -82,8 +99,16 @@ public class BaseApiController<TEntity, TDto> : ControllerBase
     public virtual async Task<IActionResult> Update(TDto dto)
     {
         var entity = _mapper.Map<TEntity>(dto);
-        await _repository.UpdateAsync(entity);
-        await _unitWork.Save();
+        var resutl = await _repository.UpdateAsync(entity);
+        try
+        {
+            await _unitWork.Save();
+        }
+        catch (Exception)
+        {
+            return BadRequest(resutl.Message);
+        }
+
         return Ok();
     }
 }

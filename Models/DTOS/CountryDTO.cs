@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,5 +15,7 @@ namespace Models.DTOS
         [Required]
         [MaxLength(100)]
         public string Name { get; set; } = null!;
+
+        public int TeamsCount { get; set; }
     }
 }

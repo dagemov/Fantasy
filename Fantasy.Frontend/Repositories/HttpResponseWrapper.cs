@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using Models.DTOS;
+using System.Net;
+using System.Text.Json;
 
 namespace Fantasy.Frontend.Repositories;
 
@@ -23,6 +25,8 @@ public class HttpResponseWrapper<T>
         }
 
         var statusCode = HttpResponseMessage.StatusCode;
+        var responseContent = await HttpResponseMessage.Content.ReadAsStringAsync();
+
         if (statusCode == HttpStatusCode.NotFound)
         {
             return "Record don't Found";

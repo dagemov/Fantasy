@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Models.DTOS;
 using System.Linq.Expressions;
+using System.Net;
 
 namespace Data.Repository;
 
@@ -49,10 +50,9 @@ public class RepositoryGeneric<T> : IRepositoryGeneric<T> where T : class
                 Message = "ERR001"
             };
         }
-
+        _entity.Remove(row);
         try
         {
-            _entity.Remove(row);
             await _context.SaveChangesAsync();
             return new ApiResponse<T>
             {
@@ -119,21 +119,23 @@ public class RepositoryGeneric<T> : IRepositoryGeneric<T> where T : class
     }
 
     //Erros Catch
-    private ApiResponse<T> ExceptionActionResponse(Exception exception)
+    private static ApiResponse<T> ExceptionActionResponse(Exception exception)
     {
         return new ApiResponse<T>
         {
             IsSuccesfuly = false,
-            Message = exception.Message
+            Message = exception.Message,
+            StatusCode = HttpStatusCode.BadRequest
         };
     }
 
-    private ApiResponse<T> DbUpdateExceptionActionResponse()
+    private static ApiResponse<T> DbUpdateExceptionActionResponse()
     {
         return new ApiResponse<T>
         {
             IsSuccesfuly = false,
-            Message = "ERR003"
+            Message = "ERR003",
+            StatusCode = HttpStatusCode.BadRequest
         };
     }
 }

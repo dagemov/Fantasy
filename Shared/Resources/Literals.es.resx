@@ -172,4 +172,10 @@
   <data name="ERR002" xml:space="preserve">
     <value>No se puede borrar porque tiene registros relacionados</value>
   </data>
+  <data name="ERR003" xml:space="preserve">
+    <value>Ya existe registro en la base de datos</value>
+  </data>
+  <data name="Duplicate" xml:space="preserve">
+    <value>Ya existe este registro en base de datos</value>
+  </data>
 </root>

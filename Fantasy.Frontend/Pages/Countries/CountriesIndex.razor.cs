@@ -5,6 +5,7 @@ using Microsoft.Extensions.Localization;
 using Models.DTOS;
 using Models.Entities;
 using Shared.Resources;
+using System.Net;
 
 namespace Fantasy.Frontend.Pages.Countries;
 
@@ -68,16 +69,17 @@ public partial class CountriesIndex
         }
 
         var responseHttp = await Repository.DeleteAsync($"api/countries/{country.Id}");
+
         if (responseHttp.Error)
         {
-            if (responseHttp.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
+            if (responseHttp.HttpResponseMessage.StatusCode == HttpStatusCode.NotFound)
             {
                 Navigation!.NavigateTo("/");
             }
             else
             {
-                var mensajeError = await responseHttp.GetErrorMessageAsync();
-                await SweetAlertService.FireAsync(Localizer["Error"], mensajeError, SweetAlertIcon.Error);
+                var menssageError = await responseHttp.GetErrorMessageAsync();
+                await SweetAlertService.FireAsync(Localizer["Error"], Localizer[menssageError!], SweetAlertIcon.Error);
             }
             return;
         }
