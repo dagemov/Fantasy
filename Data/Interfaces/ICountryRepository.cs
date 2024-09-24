@@ -1,13 +1,13 @@
-﻿using Models.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Models.DTOS;
+using Models.Entities;
 
 namespace Data.Interfaces;
 
-public interface ICountryRepository : IRepositoryGeneric<Country>
+public interface ICountryRepository
 {
-    void Update(Country country);
+    Task<ApiResponse<Country>> GetAsync(int id);
+
+    Task<ApiResponse<IEnumerable<Country>>> GetAsync();
+
+    Task<IEnumerable<Country>> GetComboAsync();
 }

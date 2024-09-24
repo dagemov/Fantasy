@@ -6,8 +6,8 @@
     <DataAnnotationsValidator />
     <div class="mb-3">
         <label>@Localizer["Country"]:</label>
-        <div>
-            <InputText class="form-control" @bind-Value="@Country.Name" />
+        <div class="col-4">
+            <RadzenTextBox class="form-control" @bind-Value="@Country.Name" MaxLength="100" />
             <ValidationMessage For="@(() => Country.Name)" />
         </div>
     </div>

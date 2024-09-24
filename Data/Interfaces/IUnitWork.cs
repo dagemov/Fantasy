@@ -4,5 +4,7 @@ public interface IUnitWork : IDisposable
 {
     IRepositoryGeneric<T> GetRepository<T>() where T : class;
 
+    ICountryRepository CountryRepository { get; }
+
     Task Save();
 }

@@ -18,8 +18,9 @@ else
             <table class="table table-striped table-dark">
                 <thead>
                     <tr>
-                        <td align="center">Country</td>
-                        <td>Actions</td>
+                        <th align="center">@Localizer["Country"]</th>
+                        <th># @Localizer["Teams"]</th>
+                        <th>Actions</th>
                         
                     </tr>
                 </thead>
@@ -28,6 +29,7 @@ else
                     {
                         <tr>
                             <td align="center">@country.Name</td>
+                            <td>@country.TeamsCount</td>
                             <td>
                                 <RadzenButton 
                                     ButtonStyle="ButtonStyle.Warning" Icon="edit_square"

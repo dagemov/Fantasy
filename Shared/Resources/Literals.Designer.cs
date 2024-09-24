@@ -133,15 +133,6 @@ namespace Shared.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This record is alredy Exist.
-        /// </summary>
-        public static string Duplicate {
-            get {
-                return ResourceManager.GetString("Duplicate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
         public static string Edit {
@@ -187,6 +178,15 @@ namespace Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The field {0} is required.
+        /// </summary>
+        public static string FieldRequired {
+            get {
+                return ResourceManager.GetString("FieldRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string Home {
@@ -210,6 +210,15 @@ namespace Shared.Resources {
         public static string LLC {
             get {
                 return ResourceManager.GetString("LLC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Field {0} cannot be longer than {1} characters..
+        /// </summary>
+        public static string MaxLength {
+            get {
+                return ResourceManager.GetString("MaxLength", resourceCulture);
             }
         }
         
@@ -282,6 +291,15 @@ namespace Shared.Resources {
         public static string Subtitle {
             get {
                 return ResourceManager.GetString("Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Team.
+        /// </summary>
+        public static string Team {
+            get {
+                return ResourceManager.GetString("Team", resourceCulture);
             }
         }
         

@@ -21,12 +21,17 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj" />
     <ProjectReference Include="..\Utilyties\Utilyties.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="SqlResources\Countries.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

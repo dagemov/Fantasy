@@ -8,7 +8,9 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        CreateMap<Country, CountryDTO>();
+        CreateMap<Country, CountryDTO>()
+           .ForMember(dest => dest.TeamsCount, opt => opt.MapFrom(src => src.Teams!.Count()))
+           .ForMember(dest => dest.Teams, opt => opt.MapFrom(src => src.Teams));
         CreateMap<Team, TeamDTO>();
 
         //Inverse Maps

@@ -19,6 +19,8 @@ public static class ServiceAppExtension
         var connectionString = config.GetConnectionString("LocalConnection");
         services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));
 
+        services.AddScoped<SeedDb>();
+
         services.Configure<ApiBehaviorOptions>(options =>
         {
             options.InvalidModelStateResponseFactory = actionContext =>
@@ -44,7 +46,7 @@ public static class ServiceAppExtension
         //I'm only comment the inyeccion cuz the country working with the genericService and unitWork;but if we need
         //at more logic, we have yo inyect it.
         services.AddScoped<ICountryService, CountryService>();
-        
+
         services.AddScoped<IUnitWork, UnitWork>();
         //Our unit Work implement the RepositoryGeneric and GenericService :)
         //services.AddScoped<(typeof (IRepositoryGeneric<>),typeof( RepositoryGeneric<>));

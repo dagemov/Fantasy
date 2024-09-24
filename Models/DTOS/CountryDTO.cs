@@ -1,10 +1,5 @@
-﻿using Models.Entities;
-using System;
-using System.Collections.Generic;
+﻿using Shared.Resources;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Models.DTOS
 {
@@ -12,10 +7,12 @@ namespace Models.DTOS
     {
         public int Id { get; set; }
 
-        [Required]
-        [MaxLength(100)]
+        [Display(Name = "Country", ResourceType = typeof(Literals))]
+        [Required(ErrorMessageResourceName = "FieldRequired", ErrorMessageResourceType = typeof(Literals))]
+        [MaxLength(100, ErrorMessageResourceName = "MaxLength", ErrorMessageResourceType = typeof(Literals))]
         public string Name { get; set; } = null!;
 
         public int TeamsCount { get; set; }
+        public List<TeamDTO>? Teams { get; set; }
     }
 }
