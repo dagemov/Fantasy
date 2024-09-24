@@ -1,6 +1,8 @@
 ﻿using BusinessLogic.Interfaces;
 using BusinessLogic.Services;
 using Data;
+using Data.Helpers.Interfaces;
+using Data.Helpers.Services;
 using Data.Interfaces;
 using Data.Repository;
 using Fantasy.Backend.Errors;
@@ -50,6 +52,8 @@ public static class ServiceAppExtension
         services.AddScoped<IUnitWork, UnitWork>();
         //Our unit Work implement the RepositoryGeneric and GenericService :)
         //services.AddScoped<(typeof (IRepositoryGeneric<>),typeof( RepositoryGeneric<>));
+
+        services.AddScoped<IFileStorage, FileStorage>();
         return services;
     }
 }
