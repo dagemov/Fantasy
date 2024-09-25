@@ -15,6 +15,10 @@ public class TeamDTO
     [Display(Name = "Image", ResourceType = typeof(Literals))]
     public string? Image { get; set; }
 
+    public string ImageFull => string.IsNullOrEmpty(Image) ? "/Images/NoImagenItem.png" : Image;
+
     [Display(Name = "Country", ResourceType = typeof(Literals))]
     public int CountryId { get; set; }
+
+    public string? CountryName { get; set; }
 }

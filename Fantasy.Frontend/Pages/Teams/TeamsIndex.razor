@@ -1,0 +1,51 @@
+﻿@page "/teams"
+
+
+<h3>@Localizer["teams"]</h3>
+
+@if (Teams is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+
+    <div class="mb-2">
+        <RadzenButton Text="@Localizer["New"]" Icon="add" Click="CreateNew"></RadzenButton>
+    </div>
+    <GenericList MyList="Teams">
+        <Body>
+            <table class="table table-striped table-dark">
+                <thead>
+                    <tr>
+                        <th align="center">@Localizer["Team"]</th>
+                        <th>@Localizer["Image"]</th>
+                        <th>@Localizer["Country"]</th>
+                        <th>Actions</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var team in Teams)
+                    {
+                        <tr>
+                            <td align="center">@team.Name</td>
+                            <td><img src="@team.ImageFull" style="width:90px;height:60px;"/></td>
+                            <td>@team.CountryName</td>
+                            <td>
+                                <RadzenButton ButtonStyle="ButtonStyle.Warning" Icon="edit_square"
+                                              Click="() => EditRecord(team.Id)">
+                                </RadzenButton>
+                                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete_forever"
+                                              Click="@(()=>DeleteAsync(team))" />
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </Body>
+    </GenericList>
+}
+
+
