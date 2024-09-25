@@ -184,4 +184,7 @@
   <data name="FieldRequired" xml:space="preserve">
     <value>El campo {0} es requerido</value>
   </data>
+  <data name="ERR004" xml:space="preserve">
+    <value>El codigo o Id del registro no es valido</value>
+  </data>
 </root>

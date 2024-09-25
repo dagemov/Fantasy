@@ -1,5 +1,4 @@
-﻿using Models.Entities;
-using Shared.Resources;
+﻿using Shared.Resources;
 using System.ComponentModel.DataAnnotations;
 
 namespace Models.DTOS;
@@ -13,6 +12,9 @@ public class TeamDTO
     [MaxLength(100, ErrorMessageResourceName = "MaxLength", ErrorMessageResourceType = typeof(Literals))]
     public string Name { get; set; } = null!;
 
+    [Display(Name = "Image", ResourceType = typeof(Literals))]
     public string? Image { get; set; }
+
+    [Display(Name = "Country", ResourceType = typeof(Literals))]
     public int CountryId { get; set; }
 }

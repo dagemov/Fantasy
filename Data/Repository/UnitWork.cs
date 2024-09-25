@@ -1,17 +1,22 @@
-﻿using Data.Interfaces;
+﻿using Data.Helpers.Interfaces;
+using Data.Interfaces;
 
 namespace Data.Repository
 {
     public class UnitWork : IUnitWork
     {
         private readonly DataContext _context;
+        private readonly IFileStorage _fileStorage;
 
         public ICountryRepository CountryRepository { get; set; }
+        public ITeamRepository TeamRepository { get; set; }
 
-        public UnitWork(DataContext context)
+        public UnitWork(DataContext context, IFileStorage fileStorage)
         {
             _context = context;
+            _fileStorage = fileStorage;
             CountryRepository = new CountryRepository(_context);
+            TeamRepository = new TeamRepository(_context, _fileStorage);
         }
 
         public IRepositoryGeneric<T> GetRepository<T>() where T : class
