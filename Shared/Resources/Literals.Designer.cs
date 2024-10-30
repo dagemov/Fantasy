@@ -295,6 +295,33 @@ namespace Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search....
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to -- Choose a country --.
+        /// </summary>
+        public static string SelectCountry {
+            get {
+                return ResourceManager.GetString("SelectCountry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select at File.
+        /// </summary>
+        public static string SelectFile {
+            get {
+                return ResourceManager.GetString("SelectFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Soccer predictions app.
         /// </summary>
         public static string Subtitle {

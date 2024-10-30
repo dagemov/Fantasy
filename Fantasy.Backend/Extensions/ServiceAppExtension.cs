@@ -6,8 +6,10 @@ using Data.Helpers.Services;
 using Data.Interfaces;
 using Data.Repository;
 using Fantasy.Backend.Errors;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Models.Entities;
 using Utilyties;
 
 namespace Fantasy.Backend.Extensions;
@@ -22,6 +24,10 @@ public static class ServiceAppExtension
         services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));
 
         services.AddScoped<SeedDb>();
+
+        services.AddIdentity<User, IdentityRole>()
+        .AddEntityFrameworkStores<DataContext>()
+        .AddDefaultTokenProviders();
 
         services.Configure<ApiBehaviorOptions>(options =>
         {

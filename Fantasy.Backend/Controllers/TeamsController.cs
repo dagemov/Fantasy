@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Data.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Models.DTOS;
+using Models.Entities;
 using Models.Entities;
 using System.Net;
 

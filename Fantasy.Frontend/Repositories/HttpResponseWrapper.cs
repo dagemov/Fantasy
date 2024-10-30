@@ -1,4 +1,4 @@
-﻿using Models.DTOS;
+﻿using Models.Entities;
 using System.Net;
 using System.Text.Json;
 

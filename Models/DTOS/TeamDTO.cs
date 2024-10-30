@@ -1,7 +1,7 @@
 ﻿using Shared.Resources;
 using System.ComponentModel.DataAnnotations;
 
-namespace Models.DTOS;
+namespace Models.Entities;
 
 public class TeamDTO
 {

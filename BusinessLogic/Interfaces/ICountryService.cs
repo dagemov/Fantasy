@@ -1,4 +1,4 @@
-﻿using Models.DTOS;
+﻿using Models.Entities;
 
 namespace BusinessLogic.Interfaces;
 

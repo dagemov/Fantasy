@@ -187,4 +187,13 @@
   <data name="ERR004" xml:space="preserve">
     <value>El codigo o Id del registro no es valido</value>
   </data>
+  <data name="SelectFile" xml:space="preserve">
+    <value>Seleccione el archivo</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Buscar...</value>
+  </data>
+  <data name="SelectCountry" xml:space="preserve">
+    <value>-- Selecione un pais --</value>
+  </data>
 </root>

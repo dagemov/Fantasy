@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using Shared.Resources;
-using Models.DTOS;
+using Models.Entities;
 
 namespace Fantasy.Frontend.Pages.Countries;
 

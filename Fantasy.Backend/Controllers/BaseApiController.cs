@@ -3,7 +3,7 @@ using Data.Interfaces;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Models.DTOS;
+using Models.Entities;
 using System.Collections.Generic;
 using System.Net;
 

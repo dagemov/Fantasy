@@ -2,7 +2,7 @@ using CurrieTechnologies.Razor.SweetAlert2;
 using Fantasy.Frontend.Repositories.Interfaces;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
-using Models.DTOS;
+using Models.Entities;
 using Models.Entities;
 using Shared.Resources;
 using System.Net;

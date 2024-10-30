@@ -1,4 +1,4 @@
-﻿using Models.DTOS;
+﻿using Models.Entities;
 using System.Linq.Expressions;
 
 namespace Data.Interfaces;

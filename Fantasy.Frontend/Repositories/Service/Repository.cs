@@ -1,5 +1,5 @@
 ﻿using Fantasy.Frontend.Repositories.Interfaces;
-using Models.DTOS;
+using Models.Entities;
 using System.Text;
 using System.Text.Json;
 

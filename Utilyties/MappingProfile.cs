@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using Models.DTOS;
+using Models.Entities;
+
 using Models.Entities;
 
 namespace Utilyties;

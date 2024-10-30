@@ -1,4 +1,4 @@
-﻿using Models.DTOS;
+﻿using Models.Entities;
 using Models.Entities;
 
 namespace Data.Interfaces;

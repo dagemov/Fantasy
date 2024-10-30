@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace Models.DTOS;
+namespace Models.Entities;
 
 public class ApiResponse<T>
 {

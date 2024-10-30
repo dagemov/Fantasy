@@ -1,7 +1,7 @@
 ﻿using Data.Helpers.Interfaces;
 using Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Models.DTOS;
+using Models.Entities;
 using Models.Entities;
 using System.Net;
 
